@@ -1,0 +1,16 @@
+{
+  "name": "AURA | Engineered for the Future",
+  "short_name": "AURA",
+  "description": "Precision. Performance. Control.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#d8d83f",
+  "icons": [
+    {
+      "src": "/next.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
