@@ -3,6 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 import { useFrame, useThree } from "@react-three/fiber";
 import SceneLighting from "./SceneLighting";
 import * as THREE from "three";
@@ -10,7 +15,7 @@ import FeatureOverlay from "./FeatureOverlay";
 import AbstractKeyboard from "./models/AbstractKeyboard";
 import LazyCanvas from "./LazyCanvas";
 
-gsap.registerPlugin(ScrollTrigger);
+// removed duplicate registration
 
 
 
@@ -65,10 +70,10 @@ function ScrollCameraController({ containerRef, innerRef }: { containerRef: Reac
         ScrollTrigger.refresh();
       }, 50);
 
-    }, [containerRef, innerRef]);
+    });
 
     return () => ctx.revert();
-  }, [camera, containerRef]);
+  }, [camera, containerRef, innerRef]);
 
   // Force camera to keep looking at center during animation
   useFrame(() => {

@@ -63,7 +63,9 @@ export default function DataCore({ status }: DataCoreProps) {
       innerRef.current.scale.lerp(new THREE.Vector3(targetValues.scale * 0.8, targetValues.scale * 0.8, targetValues.scale * 0.8), 0.1);
 
       // Smoothly interpolate material properties
-      materialRef.current.distort = THREE.MathUtils.lerp(materialRef.current.distort, targetValues.distort, 0.1);
+      if ('distort' in materialRef.current) {
+        (materialRef.current as any).distort = THREE.MathUtils.lerp((materialRef.current as any).distort, targetValues.distort, 0.1);
+      }
       materialRef.current.color.lerp(targetValues.color, 0.1);
     }
   });

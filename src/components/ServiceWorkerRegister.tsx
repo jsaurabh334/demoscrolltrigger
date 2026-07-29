@@ -10,14 +10,23 @@ import { useEffect } from "react";
 export default function ServiceWorkerRegister() {
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      // Register after page load to avoid blocking initial render
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .catch(() => {
-            // SW registration failed — site still works normally
-          });
-      });
+      if (process.env.NODE_ENV === "development") {
+        // Unregister any existing service workers in dev to prevent HMR infinite loops
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
+        });
+      } else {
+        // Register after page load in production
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .catch(() => {
+              // SW registration failed
+            });
+        });
+      }
     }
   }, []);
 

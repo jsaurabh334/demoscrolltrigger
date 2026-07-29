@@ -23,7 +23,7 @@ export default function Hero() {
       // 1. Entrance Timeline
       const tl = gsap.timeline({ 
       defaults: { ease: "expo.out", duration: 1.2 },
-      delay: 2.6 // Wait for Preloader to finish
+      delay: 0.1 // Preloader bypassed, start almost immediately
     });
 
       tl.fromTo(containerRef.current, { backgroundColor: "#000" }, { backgroundColor: "transparent", duration: 0.15 }, 0.0)
